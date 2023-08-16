@@ -1,14 +1,19 @@
 import { client } from '../../lib/apolloClient.js';
 import { gql } from '@apollo/client';
 
-export async function load({ fetch }) {
+export async function load() {
 	const { data } = await client.query({
 		query: gql`
-			query GetAllGames {
+			query GetAllGamesWithReviews {
 				games {
 					id
 					title
 					platform
+					reviews {
+						id
+						rating
+						content
+					}
 				}
 			}
 		`
